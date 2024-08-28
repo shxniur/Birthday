@@ -1,1 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise for You</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            background-color: #ffe6e6;
+            color: #b30000;
+            padding: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1, h2, p {
+            font-family: 'Georgia', serif;
+            animation: textFadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            animation-delay: 1s;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            animation-delay: 1.5s;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.5;
+            animation-delay: 2s;
+        }
+
+        input[type="date"], input[type="text"] {
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: 2px solid #b30000;
+            margin-top: 20px;
+            animation: inputFadeIn 2s ease-in-out;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            margin: 20px;
+            background-color: #ff6666;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: buttonFadeIn 2s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #e60000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #message {
+            font-size: 1.5em;
+            margin-top: 20px;
+            animation: messageFadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes inputFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes buttonFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes messageFadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ff9999;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        #popup p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        #popup button {
+            padding: 10px 20px;
+            background-color: #b30000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function handleNoClick() {
+            document.getElementById('message').textContent = "Unfortunately you have to be ready";
+            document.getElementById('noButton').classList.add('hidden');
+        }
+
+        function handleYesClick() {
+            document.getElementById('firstPage').classList.add('hidden');
+            document.getElementById('secondPage').classList.remove('hidden');
+        }
+
+        function handleDateInput() {
+            const date = document.getElementById('dateInput').value;
+            const formattedDate = date.split('-').reverse().join('/'); // Convert to European format
+
+            if (formattedDate === '29/08/2005') {
+                document.getElementById('secondPage').classList.add('hidden');
+                document.getElementById('thirdPage').classList.remove('hidden');
+            }
+        }
+
+        let attempts = 0;
+        function handlePasswordInput(event) {
+            if (event.key === "Enter" || event.type === "click") {
+                const password = document.getElementById('passwordInput').value;
+                const hint = document.getElementById('hint');
+
+                if (password === 'ILOVEYOU') {
+                    document.getElementById('popup').style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = 'https://mega.nz/folder/p68WlZyR#ff-iB7cluI_bTN5L8Sjd4Q';
+                    }, 15000);
+                } else {
+                    attempts++;
+                    if (attempts === 3) {
+                        hint.innerHTML += "<br>Hint: It's the three magical words";
+                    } else if (attempts === 4) {
+                        hint.innerHTML += "<br>Hint: In all caps";
+                    } else if (attempts === 5) {
+                        hint.innerHTML += "<br>Hint: No spaces between the words";
+                    }
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("passwordInput").addEventListener("keyup", handlePasswordInput);
+            document.getElementById("submitBtn").addEventListener("click", handlePasswordInput);
+        });
+    </script>
+</head>
+<body>
+    <div id="firstPage">
+        <h1>Welcome, I have a surprise for you</h1>
+        <p>Are you ready for it?</p>
+        <button class="button" id="yesButton" onclick="handleYesClick()">Yes</button>
+        <button class="button" id="noButton" onclick="handleNoClick()">No</button>
+        <p id="message"></p>
+    </div>
+
+    <div id="secondPage" class="hidden">
+        <h2>Input your birthdate</h2>
+        <input type="date" id="dateInput" name="dateInput" onchange="handleDateInput()" />
+    </div>
+
+    <div id="thirdPage" class="hidden">
+        <h1>Happy Birthday, My Dearest Momo</h1>
+        <p>
+            Today is such a special day because it’s your birthday, and I want to take a moment to tell you how much you mean to me. Since we started dating, my life has been filled with more love and happiness than I ever thought possible.
+        </p>
+        <p>
+            We’ve faced many challenges together, and there were times when things got tough, but we never gave up on each other. Instead of letting those obstacles push us apart, we held on to each other even tighter. Every challenge we’ve overcome has made our bond stronger, and I am so thankful for that.
+        </p>
+        <p>
+            You have shown me what real love is all about. It’s not just about the happy moments and laughter, though those are wonderful. It’s also about standing by each other when times are hard, being each other’s support, and never letting go. You’ve been my comfort, and my strength, and I can’t imagine my life without you.
+        </p>
+        <p>
+            You hold a special place in my heart that no one else can ever fill. Every day, I find myself loving you more and more. You’re the most important person in my life, and I’m so lucky to have you by my side. I want you to know that I will never take you for granted. I cherish every moment we share, every smile, every laugh, and even every challenge we face together.
+        </p>
+        <p>
+            On your birthday, I want to make you a promise. No matter what happens, I will always be here for you. I will never let you go because you are the most precious part of my life. I will continue to love you with all my heart, support you in everything you do, and treasure every moment we have together.
+        </p>
+        <p>
+            As we celebrate your special day, I want you to know just how much you mean to me. You’re not just my girlfriend; you’re my partner, my best friend, and the love of my life. Thank you for being who you are, for loving me, and for making my life so much better just by being in it.
+        </p>
+        <p>
+            Here’s to many more birthdays together, filled with love, laughter, and wonderful memories. I’m so excited to see what the future holds for us, and I can’t wait to keep building our beautiful life together.
+        </p>
+        <p>
+            Happy Birthday, my love.  
+            Always yours,  
+            Bhuban
+        </p>
+         <p>I have a surprise for you</p>
+        <input type="text" id="passwordInput" placeholder="Enter the password" />
+        <button class="button" id="submitBtn">Submit</button>
+        <p id="hint"></p>
+    </div>
+
+    <div id="popup">
+        <p>You will now be redirected to a different link.</p>
+        <p>Note: On the redirected link, you'll have a small gift, but don't watch it without having it downloaded. Simply right-click on the file and press on standard download.</p>
+    </div>
+</body>
+</html>
+
 
