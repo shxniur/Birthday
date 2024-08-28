@@ -11,24 +11,40 @@
             background-color: #ffe6e6;
             color: #b30000;
             padding: 20px;
+            animation: fadeIn 2s ease-in-out;
         }
+
         h1, h2, p {
             font-family: 'Georgia', serif;
+            animation: textFadeIn 2s ease-in-out;
         }
+
         h1 {
             font-size: 2.5em;
+            animation-delay: 1s;
         }
+
         h2 {
             font-size: 2em;
             margin-bottom: 20px;
+            animation-delay: 1.5s;
         }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.5;
+            animation-delay: 2s;
+        }
+
         input[type="date"], input[type="text"] {
             padding: 10px;
             font-size: 1.2em;
             border-radius: 5px;
             border: 2px solid #b30000;
             margin-top: 20px;
+            animation: inputFadeIn 2s ease-in-out;
         }
+
         .button {
             padding: 15px 30px;
             font-size: 1.2em;
@@ -38,13 +54,73 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: buttonFadeIn 2s ease-in-out;
         }
+
+        .button:hover {
+            background-color: #e60000;
+        }
+
         .hidden {
             display: none;
         }
+
         #message {
             font-size: 1.5em;
             margin-top: 20px;
+            animation: messageFadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes inputFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes buttonFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes messageFadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ff9999;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        #popup p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        #popup button {
+            padding: 10px 20px;
+            background-color: #b30000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
     <script>
@@ -69,23 +145,33 @@
         }
 
         let attempts = 0;
-        function handlePasswordInput() {
-            const password = document.getElementById('passwordInput').value;
-            const hint = document.getElementById('hint');
+        function handlePasswordInput(event) {
+            if (event.key === "Enter" || event.type === "click") {
+                const password = document.getElementById('passwordInput').value;
+                const hint = document.getElementById('hint');
 
-            if (password === 'ILOVEYOU') {
-                window.location.href = 'https://mega.nz/folder/p68WlZyR#ff-iB7cluI_bTN5L8Sjd4Q';
-            } else {
-                attempts++;
-                if (attempts === 3) {
-                    hint.textContent = "Hint: It's the three magical words";
-                } else if (attempts === 4) {
-                    hint.textContent = "Hint: In all caps";
-                } else if (attempts === 5) {
-                    hint.textContent = "Hint: No spaces between the words";
+                if (password === 'ILOVEYOU') {
+                    document.getElementById('popup').style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = 'https://mega.nz/folder/p68WlZyR#ff-iB7cluI_bTN5L8Sjd4Q';
+                    }, 15000);
+                } else {
+                    attempts++;
+                    if (attempts === 3) {
+                        hint.innerHTML += "<br>Hint: It's the three magical words";
+                    } else if (attempts === 4) {
+                        hint.innerHTML += "<br>Hint: In all caps";
+                    } else if (attempts === 5) {
+                        hint.innerHTML += "<br>Hint: No spaces between the words";
+                    }
                 }
             }
         }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("passwordInput").addEventListener("keyup", handlePasswordInput);
+            document.getElementById("submitBtn").addEventListener("click", handlePasswordInput);
+        });
     </script>
 </head>
 <body>
@@ -123,17 +209,23 @@
             As we celebrate your special day, I want you to know just how much you mean to me. You’re not just my girlfriend; you’re my partner, my best friend, and the love of my life. Thank you for being who you are, for loving me, and for making my life so much better just by being in it.
         </p>
         <p>
-            I wish to spend all of your birthdays together, filled with love, laughter, and wonderful memories. I’m so excited to see what the future holds for us, and I can’t wait to keep building our beautiful life together.
+            Here’s to many more birthdays together, filled with love, laughter, and wonderful memories. I’m so excited to see what the future holds for us, and I can’t wait to keep building our beautiful life together.
         </p>
         <p>
             Happy Birthday, my love.  
-            <br>Always yours,
-            <br>Bhuban
+            Always yours,  
+            Bhuban
         </p>
-        <h2>A small gift for you</h2>
-        <input type="text" id="passwordInput" placeholder="Enter password" />
-        <button class="button" onclick="handlePasswordInput()">Submit</button>
+         <p>I have a surprise for you</p>
+        <input type="text" id="passwordInput" placeholder="Enter the password" />
+        <button class="button" id="submitBtn">Submit</button>
         <p id="hint"></p>
+    </div>
+
+    <div id="popup">
+        <p>You will now be redirected to a different link.</p>
+        <p>Note: On the redirected link, you'll have a small gift, but don't watch it without having it downloaded. Simply right-click on the file and press on standard download.</p>
     </div>
 </body>
 </html>
+
