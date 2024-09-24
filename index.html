@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For my cute little Momo</title>
+    <title>Happy Anniversary, My Love!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/confetti-js/0.0.18/confetti.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -11,219 +13,225 @@
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-20px); opacity: 0; }
+            from { transform: translateY(50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        @keyframes colorChange {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffe6e6;
-            color: #ff4d4d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Lora', serif;
+            line-height: 1.8;
             margin: 0;
-            text-align: center;
+            padding: 20px;
+            background: linear-gradient(-45deg, #ffd1dc, #ff9a9e, #fad0c4, #ffecd2);
+            background-size: 400% 400%;
+            animation: colorChange 15s ease infinite, fadeIn 2s ease-out;
+            color: #4a4a4a;
         }
         .container {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
-            max-width: 600px;
-            width: 90%;
-            animation: fadeIn 1s ease-out;
-        }
-        h1 {
-            color: #ff1a1a;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
             animation: slideIn 1s ease-out;
         }
-        button {
-            background-color: #ff4d4d;
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #ff6b6b;
+            text-align: center;
+            font-size: 4em;
+            margin-bottom: 30px;
+            animation: slideIn 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ff8787;
+            text-align: center;
+            font-size: 2.5em;
+            margin-top: 40px;
+            animation: slideIn 1s ease-out;
+        }
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: #ff9999;
+        }
+        .hidden {
+            display: none;
+        }
+        #messageReveal, .next-question, .prev-question {
+            font-family: 'Lora', serif;
+            background-color: #ff8787;
             color: white;
             border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            margin: 10px 5px;
             cursor: pointer;
+            border-radius: 25px;
+            font-size: 1em;
             transition: all 0.3s;
+            animation: fadeIn 1s ease-out;
         }
-        button:hover {
-            background-color: #ff1a1a;
+        #messageReveal:hover, .next-question:hover, .prev-question:hover {
+            background-color: #ff6b6b;
             transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
         }
-        input {
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ff4d4d;
-            border-radius: 5px;
+        .memory-box {
+            border: 2px solid #ff9999;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
             transition: all 0.3s;
+            animation: fadeIn 1s ease-out;
+            background-color: rgba(255, 255, 255, 0.7);
         }
-        input:focus {
-            outline: none;
-            box-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
+        .memory-box:hover {
+            box-shadow: 0 0 20px rgba(255, 153, 153, 0.3);
+            transform: translateY(-5px);
         }
-        #message {
-            text-align: left;
-            line-height: 1.6;
-            margin-top: 20px;
+        #specialMessage {
+            padding: 25px;
+            border: 2px solid #ff9999;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
         }
-        .heartbeat {
-            animation: heartbeat 1.5s infinite;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
+        input[type="text"], input[type="date"] {
             width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ff9999;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: 'Lora', serif;
         }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 10px;
+        #quizResult {
             text-align: center;
+            font-size: 1.3em;
+            margin-top: 25px;
+            animation: slideIn 0.5s ease-out;
+            font-family: 'Playfair Display', serif;
+            color: #ff6b6b;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="page1">
-        <h1>Welcome, I have a surprise for you</h1>
-        <p>Are you ready for it?</p>
-        <button onclick="showPage2()">Yes</button>
-        <button onclick="hideNo()">No</button>
-    </div>
+    <div class="container">
+        <div id="countdown" style="text-align: center; font-size: 2em; margin-top: 20px;">
+            Countdown to Anniversary: <span id="demo"></span>
+        </div>
 
-    <div class="container" id="page2" style="display: none;">
-        <h1>Input your birthdate</h1>
-        <input type="text" id="birthdate" placeholder="DD/MM/YYYY">
-        <button onclick="checkBirthdate()">Submit</button>
-    </div>
+        <div class="hidden">
+            <h1>Happy Anniversary, My Love!</h1>
 
-    <div class="container" id="page3" style="display: none;">
-        <h1 class="heartbeat">Happy Birthday, My Dearest Momo</h1>
-        <div id="message"></div>
-        <h2>I have a surprise for you</h2>
-        <input type="password" id="password" placeholder="Enter password">
-        <button onclick="checkPassword()">Submit</button>
-        <p id="hint"></p>
-    </div>
+            <h2>Things I Love About You</h2>
+            <div class="memory-box">
+                <h3>1. I really like when you hold my arms in public</h3>
+                <p>It makes me feel so loved and protected when you hold my arms in public. It's a simple gesture, but it means the world to me.</p>
+            </div>
+            <div class="memory-box">
+                <h3>2. I really like when you spam me snaps</h3>
+                <p>Your constant stream of snaps throughout the day always puts a smile on my face. It's a little way for you to stay connected with me, and I cherish it.</p>
+            </div>
+            <div class="memory-box">
+                <h3>3. I really like when you open up to me and tell me what's bothering you</h3>
+                <p>I know it's not always easy for you to be vulnerable, but when you do, it makes me feel trusted and important. I'm here to listen and support you, no matter what.</p>
+            </div>
+            <div class="memory-box">
+                <h3>4. I really like when you prioritize me over others</h3>
+                <p>I know you have a lot of demands on your time, but when you choose to prioritize me, it shows me how much I mean to you. It's a small thing that means so much.</p>
+            </div>
+            <div class="memory-box">
+                <h3>5. I really like when you assure me that how much you love me</h3>
+                <p>Your constant reassurance of your love for me is a balm for my soul. It's a reminder that I am cherished and adored, and I could never ask for more.</p>
+            </div>
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <p>You'll now be redirected to a different link.</p>
-            <p>Note: On the redirected link you'll have a small gift but don't watch it without having it downloaded. Simply right-click on the file and press on standard download.</p>
+            <h2>Our Memorable Dates</h2>
+            <div class="memory-box">
+                <h3>Our First Date</h3>
+                <p>When I saw you for the first time, I was full of love. I was the happiest I could be, seeing my greatest achievement in front of me, and I could say I was blessed just by looking at those fairy eyes. And I will forever be thankful for taking that step with me.</p>
+            </div>
+            <div class="memory-box">
+                <h3>Our First Kiss</h3>
+                <p>At Mentu when we kissed, it was the moment I felt your lips for the first time, and it felt perfect. I felt like the luckiest man on earth to be able to kiss those lips, and whatever happens, I will always crave for that perfect kiss of yours.</p>
+            </div>
+            <div class="memory-box">
+                <h3>When I First Tasted Your Food</h3>
+                <p>I can assure you that I will forever crave for foods you cooked, but when you first made pasta for me, it was hands down the best thing I ever tasted. I felt so lucky to be able to taste something so delicious.</p>
+            </div>
+
+            <h2>Anniversary Surprise</h2>
+            <button id="messageReveal">Reveal Your Special Message</button>
+            <div id="specialMessage" class="hidden">
+                <h3>To my dearest Momo,</h3>
+                <p>As this is our first anniversary, my heart is overflowing with so many emotions. I might have called you my girlfriend before, but to me, you've always felt like my wife—my soulmate, my everything. You are the light that fills my days with joy, and no matter what happens, I will never be willing to leave you. My love for you is unshakable, and I want you to know that I am here to stay—forever.</p>
+
+                <p>Over the past year, there have been times when I've overthought about things that happened in the past. I know it hasn't been easy, but I'm trying every day to work on myself, to let go of those thoughts, because you deserve the very best version of me. Your patience and understanding have made me want to be better, and for that, I'm forever grateful.</p>
+
+                <p>Every moment we've spent together, every date we've been on, has been unforgettable. Whether it was a simple walk or a whirlwind, being with you made it perfect. I look back on each of those moments with so much love, knowing that each time, you gave me a piece of your heart. As they say in The Notebook, "It wasn't over, it still isn't over,"—because each memory with you, no matter how simple or grand, is something I will hold onto forever.</p>
+
+                <p>You've put in so much effort and even changed yourself for me. You didn't have to, but you did it out of love, and I notice every little thing. From the way you listen to me to the ways you've adjusted for us to work—it's nothing short of incredible. I feel so lucky to have someone who cares enough to grow with me.</p>
+
+                <p>Like in Pride and Prejudice when Mr. Darcy said, "You have bewitched me, body and soul, and I love, I love, I love you,"—that's exactly how I feel about you. You've captured every part of me, and there's no place I'd rather be than by your side, loving you, supporting you, and sharing this beautiful life together.</p>
+
+                <p>Happy anniversary, my love. I wish to spend many more years of happiness, love, and endless memories. I love you more than words can ever express.</p>
+
+                <p>Yours forever, Bhuban ❤️</p>
+            </div>
         </div>
     </div>
 
     <script>
-        let noButton = true;
-        let attempts = 0;
+        const messageReveal = document.getElementById('messageReveal');
+        const specialMessage = document.getElementById('specialMessage');
+        const countdown = document.getElementById('countdown');
+        const rest = document.querySelector('.hidden');
 
-        function hideNo() {
-            if (noButton) {
-                document.querySelector('button:nth-of-type(2)').style.display = 'none';
-                document.querySelector('p').textContent = 'Unfortunately you have to be ready';
-                noButton = false;
-            }
-        }
-
-        function showPage2() {
-            document.getElementById('page1').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('page1').style.display = 'none';
-                document.getElementById('page2').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('page2').style.opacity = '1';
-                }, 50);
-            }, 500);
-        }
-
-        function checkBirthdate() {
-            const birthdate = document.getElementById('birthdate').value;
-            if (birthdate === '29/08/2005') {
-                document.getElementById('page2').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('page2').style.display = 'none';
-                    document.getElementById('page3').style.display = 'block';
-                    setTimeout(() => {
-                        document.getElementById('page3').style.opacity = '1';
-                    }, 50);
-                }, 500);
-                document.getElementById('message').innerHTML = `
-                    <p>Today is such a special day because it's your birthday, and I want to take a moment to tell you how much you mean to me. Since we started dating, my life has been filled with more love and happiness than I ever thought possible.</p>
-
-                    <p>We've faced many challenges together, and there were times when things got tough, but we never gave up on each other. Instead of letting those obstacles push us apart, we held on to each other even tighter. Every challenge we've overcome has made our bond stronger, and I am so thankful for that.</p>
-
-                    <p>You have shown me what real love is all about. It's not just about the happy moments and laughter, though those are wonderful. It's also about standing by each other when times are hard, being each other's support, and never letting go. You've been my comfort, and my strength, and I can't imagine my life without you.</p>
-
-                    <p>You hold a special place in my heart that no one else can ever fill. Every day, I find myself loving you more and more. You're the most important person in my life, and I'm so lucky to have you by my side. I want you to know that I will never take you for granted. I cherish every moment we share, every smile, every laugh, and even every challenge we face together.</p>
-
-                    <p>On your birthday, I want to make you a promise. No matter what happens, I will always be here for you. I will never let you go because you are the most precious part of my life. I will continue to love you with all my heart, support you in everything you do, and treasure every moment we have together.</p>
-
-                    <p>As we celebrate your special day, I want you to know just how much you mean to me. You're not just my girlfriend; you're my partner, my best friend, and the love of my life. Thank you for being who you are, for loving me, and for making my life so much better just by being in it.</p>
-
-                    <p>Here's to many more birthdays together, filled with love, laughter, and wonderful memories. I'm so excited to see what the future holds for us, and I can't wait to keep building our beautiful life together.</p>
-
-                    <p>Happy Birthday, my love.</p>
-
-                    <p>Always yours,<br>Bhuban</p>
-                `;
-            } else {
-                alert('Please enter the correct birthdate.');
-            }
-        }
-
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            if (password === 'ILOVEYOU') {
-                showModal();
-                setTimeout(() => {
-                    window.location.href = 'https://mega.nz/folder/p68WlZyR#ff-iB7cluI_bTN5L8Sjd4Q';
-                }, 15000);
-            } else {
-                attempts++;
-                let hint = '';
-                if (attempts >= 3) {
-                    hint = "Hint: It's the three magical words";
-                }
-                if (attempts >= 4) {
-                    hint += "<br>Hint: In all caps";
-                }
-                if (attempts >= 5) {
-                    hint += "<br>Hint: No spaces between the words";
-                }
-                document.getElementById('hint').innerHTML = hint;
-                alert('Incorrect password. Please try again.');
-            }
-        }
-
-        function showModal() {
-            document.getElementById('myModal').style.display = "block";
-        }
-
-        // Add event listener for Enter key on password input
-        document.getElementById('password').addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                checkPassword();
-            }
+        messageReveal.addEventListener('click', function() {
+            specialMessage.classList.remove('hidden');
+            specialMessage.style.animation = 'fadeIn 1s ease-out';
+            confetti.start();
+            setTimeout(() => confetti.stop(), 3000);
         });
+
+        // Set the date we're counting down to (September 25, 2024)
+        const countDownDate = new Date("Sep 25, 2024 00:00:00").getTime();
+
+        // Update the count down every 1 second
+        const x = setInterval(function() {
+
+            // Get today's date and time
+            const now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            const distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in an element with id="demo"
+            document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "Happy Anniversary!";
+                countdown.classList.add('hidden');
+                rest.classList.remove('hidden');
+            }
+        }, 1000);
     </script>
 </body>
 </html>
